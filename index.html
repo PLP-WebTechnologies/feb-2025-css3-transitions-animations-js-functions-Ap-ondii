@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Button Animation with Local Storage</title>
+  <style>
+    /* Include CSS for animation and button style */
+    @keyframes grow {
+      0% {
+        transform: scale(1);
+      }
+      100% {
+        transform: scale(1.2);
+      }
+    }
+
+    button {
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      padding: 15px 32px;
+      text-align: center;
+      font-size: 16px;
+      cursor: pointer;
+      border-radius: 5px;
+      transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+      animation: grow 0.5s ease-in-out;
+      background-color: #45a049;
+    }
+  </style>
+</head>
+<body>
+   
+            <h1>Button Animation with Local Storage</h1>
+            <p>Click the button to change its color and save your preference.</p>
+       
+
+        <button onclick="toggleButtonColor()">Click to change color</button>
+  <script>
+    // Save user preference to localStorage
+    function saveUserPreference(preference) {
+      localStorage.setItem('buttonColorPreference', preference);
+    }
+
+    // Retrieve user preference from localStorage
+    function getUserPreference() {
+      const preference = localStorage.getItem('buttonColorPreference');
+      return preference ? preference : 'green'; // Default is 'green'
+    }
+
+    // Apply saved preference on page load
+    window.onload = function() {
+      const savedColor = getUserPreference();
+      const button = document.querySelector('button');
+      button.style.backgroundColor = savedColor;
+    };
+
+    // Toggle background color and save preference
+    function toggleButtonColor() {
+      const button = document.querySelector('button');
+      const currentColor = button.style.backgroundColor;
+
+      // Change color and save new preference
+      if (currentColor === 'rgb(72, 179, 90)') { // green
+        button.style.backgroundColor = '#FF5733'; // change to red
+        saveUserPreference('#FF5733');
+      } else {
+        button.style.backgroundColor = '#4CAF50'; // change back to green
+        saveUserPreference('#4CAF50');
+      }
+    }
+  </script>
+</body>
+</html>
